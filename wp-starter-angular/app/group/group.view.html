@@ -15,7 +15,8 @@
       <div class="form-group">
         <label>Size</label>
         <ui-select ng-model="vm.entity.groupSize"
-                   title="Choose group size">
+                   title="Choose group size"
+                   ng-required="true">
           <ui-select-match
             placeholder="Select group size...">
             <span>{{$select.selected}}</span>
@@ -29,7 +30,7 @@
       </div>
       <div class="form-group">
         <label>Exercise Number</label>
-        <input type="number" class="form-control" min="1" ng-model="vm.entity.exerciseNum">
+        <input type="number" class="form-control" min="1" ng-model="vm.entity.exerciseNum" ng-required="true">
       </div>
     </div>
     <div class="panel-footer text-right">
@@ -55,15 +56,31 @@
   </form>
 </div>
 <div class="row">
+  <div class="col-md-4">
+    <div class="input-group" ng-show="vm.entities.length>0">
+      <input type="text" class="form-control" placeholder="Search for group" ng-model="vm.search.name">
+      <span class="input-group-addon">
+        <i class="fa fa-x fa-search"></i>
+      </span>
+    </div>
+  </div>
+  <div class="col-md-8"></div>
+</div>
+<br/>
+<div class="row">
   <div class="col-md-12">
     <table ng-show="vm.entities.length>0" class="table table-bordered table-striped">
       <tr>
-        <th>Group Name</th>
+        <th>
+        <button ng-click="vm.sortBy('name')" class="btn btn-default">Group Name &nbsp; <i class="fa fa-x fa-sort"></i> </button>
+        </th>
         <th>Group Size</th>
-        <th>Exercise Number</th>
+        <th>
+          <button ng-click="vm.sortBy('exerciseNum')" class="btn btn-default">Exercise Number <i class="fa fa-x fa-sort"></i></button>
+        </th>
         <th>Actions</th>
       </tr>
-      <tr ng-repeat="e in vm.entities">
+      <tr ng-repeat="e in vm.entities | orderBy:vm.propertyName:vm.reverse | filter:vm.search">
         <td>{{e.name}}</td>
         <td>{{e.groupSize}}</td>
         <td>{{e.exerciseNum}}</td>

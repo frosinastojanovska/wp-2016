@@ -5,16 +5,19 @@
     .module('wp-angular-starter')
     .controller('GroupController', GroupController);
 
-  GroupController.$inject = ['$log', 'GroupService'];
+  GroupController.$inject = ['$log', 'GroupService', 'orderByFilter'];
 
   /* @ngInject */
-  function GroupController($log, GroupService) {
+  function GroupController($log, GroupService, orderBy) {
     var vm = this;
     vm.title = 'Group';
     vm.save = save;
     vm.clear = clear;
     vm.edit = edit;
     vm.remove = remove;
+    vm.sortBy = sortBy;
+    vm.propertyName = 'name';
+    vm.reverse = true;
     vm.entity = {};
     vm.entities = [];
     vm.saveOkMsg = null;
@@ -61,6 +64,13 @@
           loadGroups();
         });
     }
+
+    function sortBy(propertyName) {
+      vm.reverse = (vm.propertyName === propertyName) ? !vm.reverse : false;
+      vm.propertyName = propertyName;
+      vm.entities = orderBy(vm.entities, vm.propertyName, vm.reverse);
+      $log.debug(vm.propertyName);
+    };
   }
 
 })(angular);

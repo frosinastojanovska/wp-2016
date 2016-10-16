@@ -59,6 +59,18 @@
         || entity.name.length === 0) {
         return 'Invalid name for group';
       }
+      if (entity.groupSize === null
+        || entity.groupSize === undefined
+        || typeof entity.groupSize !== 'number'
+        || entity.groupSize.length === 0) {
+        return 'Select group size';
+      }
+      if (entity.exerciseNum === null
+        || entity.exerciseNum === undefined
+        || typeof entity.exerciseNum !== 'number'
+        || entity.exerciseNum.length === 0) {
+        return 'Invalid exercise number';
+      }
       return null;
     }
 
