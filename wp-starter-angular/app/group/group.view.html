@@ -27,6 +27,10 @@
           </ui-select-choices>
         </ui-select>
       </div>
+      <div class="form-group">
+        <label>Exercise Number</label>
+        <input type="number" class="form-control" min="1" ng-model="vm.entity.exerciseNum">
+      </div>
     </div>
     <div class="panel-footer text-right">
       <div class="panel panel-danger text-center text-danger" ng-show="vm.saveErrMsg">
@@ -56,19 +60,21 @@
       <tr>
         <th>Group Name</th>
         <th>Group Size</th>
+        <th>Exercise Number</th>
         <th>Actions</th>
       </tr>
       <tr ng-repeat="e in vm.entities">
         <td>{{e.name}}</td>
         <td>{{e.groupSize}}</td>
+        <td>{{e.exerciseNum}}</td>
         <td>
           <button class="btn btn-xs btn-default"
                   ng-click="vm.edit(e)">
-            Edit
+            <i class="fa fa-x fa-pencil"></i>&nbsp;Edit
           </button>
           <button class="btn btn-xs btn-danger"
                   ng-click="vm.remove(e)">
-            Remove
+            <i class="fa fa-x fa-trash"></i>&nbsp;Remove
           </button>
         </td>
       </tr>
