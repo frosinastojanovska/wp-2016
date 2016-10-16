@@ -1,0 +1,78 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h4>Add new student</h4>
+  </div>
+  <form name="form" ng-submit="vm.save()">
+  <div class="panel-body">
+    <label>Name</label>
+    <div class="form-group">
+      <input class="form-control" type="text" ng-model="vm.entity.name" ng-required="true">
+    </div>
+    <div class="form-group">
+      <label>Surname</label>
+      <input class="form-control" type="text" ng-model="vm.entity.surname" ng-required="true">
+    </div>
+    <div class="form-group">
+      <label>Index</label>
+      <input class="form-control" type="number" ng-model="vm.entity.index" ng-required="true">
+    </div>
+    <div class="form-group">
+      <label>Group</label>
+      <ui-select ng-model="vm.entity.group" title="Choose group" ng-required="true">
+        <ui-select-match placeholder="Select group ...">
+          <span>{{$select.selected.name}}</span>
+        </ui-select-match>
+        <ui-select-choices repeat="group in (vm.groups | filter:$select.search )"
+                           position="auto">
+          {{group.name}}
+        </ui-select-choices>
+      </ui-select>
+    </div>
+  </div>
+    <div class="panel-footer text-right">
+      <div class="panel panel-danger text-center text-danger" ng-show="vm.saveErrMsg">
+        {{vm.saveErrMsg}}
+      </div>
+      <div class="panel panel-success text-center text-success" ng-show="vm.saveOkMsg">
+        {{vm.saveOkMsg}}
+      </div>
+      <button class="btn btn-default" type="button"><i class="fa fa-x fa-refresh"></i>&nbsp;Clear</button>
+      <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid"><i class="fa fa-x fa-save"></i>&nbsp;Save</button>
+    </div>
+  </form>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table ng-show="vm.entities.length>0" class="table table-bordered table-striped">
+      <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Index</th>
+        <th>Group Name</th>
+        <th>Actions</th>
+      </tr>
+      <tr ng-repeat="e in vm.entities">
+        <td>{{e.name}}</td>
+        <td>{{e.surname}}</td>
+        <td>{{e.index}}</td>
+        <td>{{e.group.name}}</td>
+        <td>
+          <button class="btn btn-xs btn-default"
+                  ng-click="vm.edit(e)">
+            <i class="fa fa-x fa-pencil"></i>&nbsp;Edit
+          </button>
+          <button class="btn btn-xs btn-danger"
+                  ng-click="vm.remove(e)">
+            <i class="fa fa-x fa-trash"></i>&nbsp;Remove
+          </button>
+        </td>
+      </tr>
+    </table>
+
+    <div class="panel panel-warning text-warning" ng-hide="vm.entities.length>0">
+      There are no students!
+    </div>
+  </div>
+</div>
+
