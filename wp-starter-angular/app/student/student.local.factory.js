@@ -8,10 +8,10 @@
     .module('wp-angular-starter')
     .factory('StudentService', StudentServiceFn);
 
-  StudentServiceFn.$inject = ['$log', '$timeout', '$q'];
+  StudentServiceFn.$inject = ['$log', '$timeout', '$q', '$localStorage'];
 
-  function StudentServiceFn($log, $timeout, $q) {
-    var studentsList = [];
+  function StudentServiceFn($log, $timeout, $q, $localStorage) {
+    $localStorage.studentsList = $localStorage.studentsList || [];
     var studentIdSequence = 0;
 
     var service = {
@@ -36,7 +36,7 @@
           errorMessage = validateStudent(entityForSave);
           if (errorMessage === null) {
             entityForSave.id = ++studentIdSequence;
-            studentsList.push(entityForSave);
+            $localStorage.studentsList.push(entityForSave);
             $log.debug('saving student', entityForSave);
             deferred.resolve(entityForSave);
           } else {
@@ -111,7 +111,7 @@
         if (index === -1) {
           deferred.resolve(null);
         } else {
-          deferred.resolve(studentsList[index]);
+          deferred.resolve($localStorage.studentsList[index]);
         }
       }, 100);
       return deferred.promise;
@@ -122,8 +122,8 @@
       var result = -1, item;
 
       $log.debug('get index by id: ', studentId);
-      for (var i = 0; i < studentsList.length; i++) {
-        item = studentsList[i];
+      for (var i = 0; i < $localStorage.studentsList.length; i++) {
+        item = $localStorage.studentsList[i];
         if (item.id === studentId) {
           result = i;
           break;
@@ -137,7 +137,7 @@
       var deferred = $q.defer();
       $timeout(function () {
         $log.debug('getAllStudents');
-        deferred.resolve(angular.copy(studentsList));
+        deferred.resolve(angular.copy($localStorage.studentsList));
       }, 100);
       return deferred.promise;
     }
@@ -147,7 +147,7 @@
       $timeout(function () {
         var index = findIndexById(entity.id);
         if (index !== -1) {
-          studentsList.splice(index, 1);
+          $localStorage.studentsList.splice(index, 1);
         }
         $log.debug('remove', entity);
         deferred.resolve();
