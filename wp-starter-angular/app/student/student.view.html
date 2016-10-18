@@ -45,8 +45,8 @@
 
 <div class="row">
   <div class="col-md-12">
-    <table ng-show="vm.entities.length>0" class="table table-bordered table-striped" st-table="vm.entities"
-           st-safe-src="vm.rowCollection">
+    <table ng-show="vm.entities.length>0" class="table table-bordered table-striped" st-table="vm.rowCollection"
+           st-safe-src="vm.entities">
       <tr>
         <th st-sort="name">
           <button class="btn btn-default">Name &nbsp; <i class="fa fa-x fa-sort"></i></button>
@@ -72,7 +72,7 @@
           </div>
         </th>
       </tr>
-      <tr ng-repeat="e in vm.entities">
+      <tr ng-repeat="e in vm.rowCollection">
         <td>{{e.name}}</td>
         <td>{{e.surname}}</td>
         <td>{{e.index}}</td>
