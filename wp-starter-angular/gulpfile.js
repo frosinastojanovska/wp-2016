@@ -29,7 +29,8 @@ var JS_APP = [
   'app/directives/wp-combo/wp-combo.directive.js'
   'app/student/student.state.js',
   'app/student/student.controller.js',
-  'app/student/student.local.factory.js'
+  'app/student/student.local.factory.js',
+  'app/component/wp-input.component.js'
 ];
 
 var TEMPLATES_SRC = [
