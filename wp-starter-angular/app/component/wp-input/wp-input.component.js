@@ -7,7 +7,6 @@
   function WpInputController($attrs, $log){
     this.wpLabel = $attrs.wpLabel;
     this.wpType = $attrs.wpType;
-    this.wpFocus = $attrs.wpFocus;
     this.wpRequired = $attrs.wpRequired;
     $log.debug($attrs);
   }
@@ -17,10 +16,11 @@
   angular
     .module('wp-angular-starter')
     .component('wpInput', {
-      templateUrl: "app/component/wp-input.component.html",
+      templateUrl: "app/component/wp-input/wp-input.component.html",
       controller: WpInputController,
       bindings: {
-        wpModel: '='
+        wpModel: '=',
+        wpFocus: '='
       }
     });
 

@@ -1,0 +1,12 @@
+<div class="form-group">
+  <label>Group</label>
+  <ui-select ng-model="$ctrl.wpModel" title="Choose group" ng-required="true">
+    <ui-select-match placeholder="Select group ...">
+      <span>{{$select.selected.name}}</span>
+    </ui-select-match>
+    <ui-select-choices repeat="group in ($ctrl.groups | filter:$select.search )"
+                       position="auto">
+      {{group.name}}
+    </ui-select-choices>
+  </ui-select>
+</div>
