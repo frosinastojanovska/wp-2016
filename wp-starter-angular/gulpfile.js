@@ -30,7 +30,9 @@ var JS_APP = [
   'app/student/student.state.js',
   'app/student/student.controller.js',
   'app/student/student.local.factory.js',
-  'app/component/wp-input.component.js'
+  'app/component/wp-input/wp-input.component.js',
+  'app/component/group-select/group-select.component.js',
+  'app/component/focus-me/focus-me.component.js'
 ];
 
 var TEMPLATES_SRC = [
