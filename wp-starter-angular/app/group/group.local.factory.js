@@ -5,12 +5,12 @@
     .module('wp-angular-starter')
     .factory('GroupService', GroupServiceFn);
 
-  GroupServiceFn.$inject = ['$log', '$timeout', '$q'];
+  GroupServiceFn.$inject = ['$log', '$timeout', '$q', '$localStorage'];
 
   /* @ngInject */
-  function GroupServiceFn($log, $timeout, $q) {
-    var groupsList = [];
-    var groupIdSequence = 0;
+  function GroupServiceFn($log, $timeout, $q, $localStorage) {
+    $localStorage.groupsList = $localStorage.groupsList || [];
+    $localStorage.groupIdSequence = $localStorage.groupIdSequence || 0;
 
     var service = {
       save: saveFn,
@@ -33,8 +33,8 @@
           entityForSave = angular.copy(groupEntity);
           invalidMessage = validateGroup(entityForSave);
           if (invalidMessage === null) {
-            entityForSave.id = ++groupIdSequence;
-            groupsList.push(entityForSave);
+            entityForSave.id = ++$localStorage.groupIdSequence;
+            $localStorage.groupsList.push(entityForSave);
             $log.debug('saving', entityForSave);
             deferred.resolve(entityForSave);
           } else {
@@ -105,7 +105,7 @@
         if (index === -1) {
           deferred.resolve(null);
         } else {
-          deferred.resolve(groupsList[index]);
+          deferred.resolve($localStorage.groupsList[index]);
         }
       }, 100);
       return deferred.promise;
@@ -117,7 +117,7 @@
       var deferred = $q.defer();
       $timeout(function () {
         $log.debug('getAll');
-        deferred.resolve(angular.copy(groupsList));
+        deferred.resolve(angular.copy($localStorage.groupsList));
       }, 100);
       return deferred.promise;
     }
@@ -127,7 +127,7 @@
       $timeout(function () {
         var index = findIndexById(groupEntity.id);
         if (index !== -1) {
-          groupsList.splice(index, 1);
+          $localStorage.groupsList.splice(index, 1);
         }
         $log.debug('remove', groupEntity);
         deferred.resolve();
@@ -140,8 +140,8 @@
       var result = -1, item;
 
       $log.debug('get index by id: ', groupId);
-      for (var i = 0; i < groupsList.length; i++) {
-        item = groupsList[i];
+      for (var i = 0; i < $localStorage.groupsList.length; i++) {
+        item = $localStorage.groupsList[i];
         if (item.id === groupId) {
           result = i;
           break;

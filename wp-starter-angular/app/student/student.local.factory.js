@@ -12,7 +12,7 @@
 
   function StudentServiceFn($log, $timeout, $q, $localStorage) {
     $localStorage.studentsList = $localStorage.studentsList || [];
-    var studentIdSequence = 0;
+    $localStorage.studentIdSequence = $localStorage.studentIdSequence || 0;
 
     var service = {
       save: saveFn,
@@ -35,7 +35,7 @@
           entityForSave = angular.copy(entity);
           errorMessage = validateStudent(entityForSave);
           if (errorMessage === null) {
-            entityForSave.id = ++studentIdSequence;
+            entityForSave.id = ++$localStorage.studentIdSequence;
             $localStorage.studentsList.push(entityForSave);
             $log.debug('saving student', entityForSave);
             deferred.resolve(entityForSave);
