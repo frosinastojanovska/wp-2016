@@ -16,7 +16,7 @@
   angular
     .module('wp-angular-starter')
     .component('wpInput', {
-      templateUrl: "app/component/wp-input/wp-input.component.html",
+      templateUrl: "app/components/wp-input/wp-input.component.html",
       controller: WpInputController,
       bindings: {
         wpModel: '=',

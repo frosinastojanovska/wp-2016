@@ -20,7 +20,7 @@
   angular
     .module('wp-angular-starter')
     .component('groupSelect', {
-      templateUrl: "app/component/group-select/group-select.component.html",
+      templateUrl: "app/components/group-select/group-select.component.html",
       controller: GroupSelectController,
       bindings: {
         wpModel: '='
