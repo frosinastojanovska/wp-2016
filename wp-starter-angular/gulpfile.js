@@ -26,7 +26,7 @@ var JS_APP = [
   'app/group/group.local.factory.js',
   'app/default-page/**.js',
   'app/directives/showcase-directive/showcase-directive.directive.js',
-  'app/directives/wp-combo/wp-combo.directive.js'
+  'app/directives/wp-combo/wp-combo.directive.js',
   'app/student/student.state.js',
   'app/student/student.controller.js',
   'app/student/student.local.factory.js',
