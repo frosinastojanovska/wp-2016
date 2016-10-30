@@ -8,6 +8,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <display-name>Web Programming Starter project</display-name>
     <description>Project used for the Web Programming subject</description>
 
+    <servlet>
+        <servlet-name>PizzaOrder</servlet-name>
+        <servlet-class>mk.ukim.finki.wp.web.PizzaOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddressInfo</servlet-name>
+        <servlet-class>mk.ukim.finki.wp.web.AddressInfo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PizzaOrder</servlet-name>
         <url-pattern>/PizzaOrder.do</url-pattern>
@@ -18,8 +26,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         <url-pattern>/AddressInfo.do</url-pattern>
     </servlet-mapping>
 
-<!--
-    <context-param>
+    <!--<context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring/business-config.xml</param-value>
     </context-param>-->
