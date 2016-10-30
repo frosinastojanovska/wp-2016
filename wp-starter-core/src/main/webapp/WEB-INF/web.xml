@@ -5,13 +5,24 @@
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="WebApp_ID" version="2.5">
 
-    <display-name>Spring MVC Starter</display-name>
-    <description>Starter Application for basic Spring MVC</description>
+    <display-name>Web Programming Starter project</display-name>
+    <description>Project used for the Web Programming subject</description>
 
+    <servlet-mapping>
+        <servlet-name>PizzaOrder</servlet-name>
+        <url-pattern>/PizzaOrder.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AddressInfo</servlet-name>
+        <url-pattern>/AddressInfo.do</url-pattern>
+    </servlet-mapping>
+
+<!--
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring/business-config.xml</param-value>
-    </context-param>
+    </context-param>-->
 
    <!-- &lt;!&ndash; - Location of the XML file that defines the root application context.
         - Applied by ContextLoaderListener. &ndash;&gt;
