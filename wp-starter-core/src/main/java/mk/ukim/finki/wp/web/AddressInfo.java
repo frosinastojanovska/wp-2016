@@ -14,8 +14,12 @@ public class AddressInfo extends HttpServlet {
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String pizzaSize = request.getSession().getAttribute("pizzaSize").toString();
+        response.setContentType("text/html");
+        response.setBufferSize(8192);
         PrintWriter writer = response.getWriter();
-        writer.println(String.format("%s \n Name: %s \n Address: %s \n Pizza size: %s \n", userAgent, name, address, pizzaSize));
+        writer.println("<html><head><title>Confirmation</title></head><body><h3>Confirmation</h3>");
+        writer.println(String.format("<div>%s <br> Name: %s <br> Address: %s <br> Pizza size: %s <br></div>", userAgent, name, address, pizzaSize));
+        writer.print("</body></html>");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
