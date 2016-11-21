@@ -85,9 +85,9 @@
                 wp-model="vm.entity.property"
                 wp-data="[{id:5, name:'Riste'}, {id:6, name:'Petko'}]">
 
-        <selected>{{$select.selected.name}}</selected>
+        <selected>{{$parent.$select.selected.name}}</selected>
 
-        <item>[{{item.id}}] {{item.name}}</item>
+        <item>[{{$parent.item.id}}] {{$parent.item.name}}</item>
       </wp-combo>
 
 
