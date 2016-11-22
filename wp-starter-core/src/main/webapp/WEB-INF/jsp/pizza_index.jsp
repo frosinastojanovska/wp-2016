@@ -12,6 +12,7 @@
 <html>
 <head>
     <title>Index</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/png">
     <style>
         label {
             display: inline-block;
