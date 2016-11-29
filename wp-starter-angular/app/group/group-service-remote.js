@@ -11,12 +11,8 @@
   GroupServiceFn.$inject = ['$resource'];
 
   function GroupServiceFn($resource) {
-    return $resource('http://localhost:8080/api/groups/:id', {id:"@id"},
+    return $resource('http://localhost:8000/api/groups/:id', {},
       {
-        query: {method: "GET", isArray: true},
-        save: {method: "POST"},
-        get: {method: "GET"},
-        remove: {method: "DELETE"},
         update: {method: "PUT"}
       }
     );

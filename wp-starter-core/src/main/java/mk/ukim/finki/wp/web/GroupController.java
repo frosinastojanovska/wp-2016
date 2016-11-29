@@ -20,11 +20,12 @@ public class GroupController {
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody List<Group> findAll(){
-        return groupService.findAll();
+        List<Group> res = groupService.findAll();
+        return res;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public Group findById(@PathVariable Long id){
+    public Group findById(@PathVariable Integer id){
         return groupService.findById(id);
     }
 
@@ -34,12 +35,12 @@ public class GroupController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public void update(@PathVariable Long id, @RequestBody Group group){
+    public void update(@PathVariable Integer id, @RequestBody Group group){
         groupService.update(id, group);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Integer id){
         groupService.delete(id);
     }
 

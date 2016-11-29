@@ -33,6 +33,7 @@
     }
 
     function remove(entity) {
+      $log.debug(entity);
       GroupService.remove({id: entity.id}, function(data){
         loadGroups();
       });
