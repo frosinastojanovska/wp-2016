@@ -16,3 +16,4 @@ hs_err_pid*
 *.iml
 
 wp-starter-core/wp-2016-11-22.log
+wp-starter-core/*.log

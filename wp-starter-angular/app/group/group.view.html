@@ -8,7 +8,7 @@
       <wp-input wp-label="Name" wp-type="text" wp-model="vm.entity.name" wp-focus="true" wp-required="true" ng-cloak></wp-input>
       <div class="form-group">
         <label>Size</label>
-        <ui-select ng-model="vm.entity.groupSize"
+        <ui-select ng-model="vm.entity.capacity"
                    title="Choose group size"
                    ng-required="true">
           <ui-select-match
@@ -22,7 +22,7 @@
           </ui-select-choices>
         </ui-select>
       </div>
-      <wp-input wp-label="Exercise Number" wp-type="number" wp-model="vm.entity.exerciseNum" wp-focus="false" wp-required="true" ng-cloak></wp-input>
+      <wp-input wp-label="Exercise Number" wp-type="number" wp-model="vm.entity.noExercise" wp-focus="false" wp-required="true" ng-cloak></wp-input>
 
     </div>
     <div class="panel-footer text-right">
@@ -74,8 +74,8 @@
       </tr>
       <tr ng-repeat="e in vm.entities | orderBy:vm.propertyName:vm.reverse | filter:vm.search">
         <td>{{e.name}}</td>
-        <td>{{e.groupSize}}</td>
-        <td>{{e.exerciseNum}}</td>
+        <td>{{e.capacity}}</td>
+        <td>{{e.noExercise}}</td>
         <td>
           <button class="btn btn-xs btn-default"
                   ng-click="vm.edit(e)">

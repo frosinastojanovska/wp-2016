@@ -26,26 +26,46 @@
     loadGroups();
 
     function loadGroups() {
-      GroupService.getAll().then(function (data) {
-        vm.entities = data;
+      GroupService.query(function(data) {
+        vm.entities=data;
+        $log.debug(data);
+      });
+    }
+
+    function remove(entity) {
+      GroupService.remove({id: entity.id}, function(data){
+        loadGroups();
       });
     }
 
     function save() {
+      var entity = vm.entity;
       vm.saveOkMsg = null;
       vm.saveErrMsg = null;
 
-      var promise = GroupService.save(vm.entity);
-      promise.then(successCallback, errorCallback);
-      function successCallback(data) {
-        loadGroups();
-        vm.saveOkMsg = "Group with id " + data.id + " is saved";
-        clear();
+      if(entity.id != null) {
+        editEntity(entity);
+        return;
       }
 
-      function errorCallback(data) {
-        vm.saveErrMsg = "Saving error occurred: " + data.message;
-      }
+        GroupService.save(entity, function (data) {
+          loadGroups();
+          vm.saveOkMsg = "Group with id " + data.id + " is saved";
+          clear();
+        }, function (data) {
+          vm.saveErrMsg = "Saving error occurred: " + data.message;
+        });
+    }
+
+    function editEntity(entity){
+      vm.saveOkMsg = null;
+      vm.saveErrMsg = null;
+
+      GroupService.update({id: entity.id}, entity, function (data) {
+        loadGroups();
+      }, function (data) {
+
+      });
     }
 
     function clear() {
@@ -55,14 +75,6 @@
     function edit(entity) {
       vm.entity = {};
       angular.extend(vm.entity, entity);
-    }
-
-    function remove(entity) {
-      GroupService
-        .remove(entity)
-        .then(function () {
-          loadGroups();
-        });
     }
 
     function sortBy(propertyName) {

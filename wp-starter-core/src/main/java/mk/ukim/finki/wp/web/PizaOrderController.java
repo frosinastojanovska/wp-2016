@@ -20,6 +20,7 @@ import java.util.List;
  * Created by Frosina on 22.11.2016.
  */
 @Controller
+@RequestMapping(value = "/")
 public class PizaOrderController {
 
     @Autowired

@@ -7,6 +7,6 @@ import java.util.List;
  */
 public interface IPizzaService {
 
-    public List<String> getPizzaTypes();
+    List<String> getPizzaTypes();
 
 }

@@ -8,6 +8,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <display-name>Web Programming Starter project</display-name>
     <description>Project used for the Web Programming subject</description>
 
+    <filter>
+        <filter-name>cors</filter-name>
+        <filter-class>mk.ukim.finki.wp.web.CORSFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>cors</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>PizzaOrder</servlet-name>
         <servlet-class>mk.ukim.finki.wp.web.PizzaOrder</servlet-class>

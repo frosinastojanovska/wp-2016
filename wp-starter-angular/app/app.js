@@ -6,7 +6,8 @@
       'ui.router',
       'ui.select',
       'smart-table',
-      'ngStorage'
+      'ngStorage',
+      'ngResource'
     ]);
 
 })(angular);
