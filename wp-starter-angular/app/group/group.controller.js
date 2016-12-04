@@ -26,47 +26,33 @@
     loadGroups();
 
     function loadGroups() {
-      GroupService.query(function(data) {
-        vm.entities=data;
-        $log.debug(data);
+      GroupService.getAll().then(function (data) {
+        vm.entities = data;
       });
     }
 
     function remove(entity) {
-      $log.debug(entity);
-      GroupService.remove({id: entity.id}, function(data){
+      GroupService.remove(entity).then(function () {
         loadGroups();
       });
     }
 
     function save() {
-      var entity = vm.entity;
       vm.saveOkMsg = null;
       vm.saveErrMsg = null;
 
-      if(entity.id != null) {
-        editEntity(entity);
-        return;
+      var promise = GroupService.save(vm.entity);
+      promise.then(successCallback, errorCallback);
+
+      function successCallback(data) {
+        loadGroups();
+        vm.saveOkMsg = "Group with id " + data.id + " is saved";
+        clear();
       }
 
-        GroupService.save(entity, function (data) {
-          loadGroups();
-          vm.saveOkMsg = "Group with id " + data.id + " is saved";
-          clear();
-        }, function (data) {
-          vm.saveErrMsg = "Saving error occurred: " + data.message;
-        });
-    }
-
-    function editEntity(entity){
-      vm.saveOkMsg = null;
-      vm.saveErrMsg = null;
-
-      GroupService.update({id: entity.id}, entity, function (data) {
-        loadGroups();
-      }, function (data) {
-
-      });
+      function errorCallback(data) {
+        vm.saveErrMsg = "Saving error occurred: " + data.message;
+      }
     }
 
     function clear() {

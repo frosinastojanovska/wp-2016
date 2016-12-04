@@ -10,7 +10,7 @@ import java.util.*;
  * Created by Frosina on 28.11.2016.
  */
 @Service
-public class GroupServiceImpl implements IGroupService{
+public class GroupService implements IGroupService{
     private static Map<Integer,Group> idToGroup = new HashMap<Integer, Group>();
 
     public List<Group> findAll(){
@@ -19,9 +19,10 @@ public class GroupServiceImpl implements IGroupService{
     public Group findById(Integer id){
         return idToGroup.get(id);
     }
-    public void save(Group entity){
+    public Group save(Group entity){
         entity.setId(new Random().nextInt(Integer.MAX_VALUE));
         idToGroup.put(entity.getId(), entity);
+        return entity;
     }
     public void update(Integer id, Group entity){
         idToGroup.remove(id);

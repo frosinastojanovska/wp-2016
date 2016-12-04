@@ -23,7 +23,7 @@ var JS_APP = [
   'app/c1/second.controller.js',
   'app/group/group.state.js',
   'app/group/group.controller.js',
-  'app/group/group-service-remote.js',
+  'app/group/group.remote.service.js',
   'app/student/student.state.js',
   'app/student/student.controller.js',
   'app/student/student.local.factory.js',

@@ -30,8 +30,8 @@ public class GroupController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void save(@RequestBody Group group){
-        groupService.save(group);
+    public Group save(@RequestBody Group group){
+        return groupService.save(group);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")

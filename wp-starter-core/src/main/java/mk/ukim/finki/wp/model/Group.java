@@ -24,13 +24,17 @@ public class Group {
         return id;
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     public Integer getCapacity() {
         return capacity;
     }
 
-    public Integer getNoExercise() { return noExercise; }
+    public Integer getNoExercise() {
+        return noExercise;
+    }
 
     public void setId(Integer id) {
         this.id = id;
