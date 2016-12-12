@@ -1,14 +1,23 @@
 package mk.ukim.finki.wp.model;
 
-import java.util.Random;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Frosina on 28.11.2016.
  */
+@Entity
+@Table(name = "lab_groups")
 public class Group {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull
     private String name;
+    @Min(value = 0)
     private Integer capacity;
+    @Min(value = 0)
     private Integer noExercise;
 
     public Group(){}
@@ -50,5 +59,29 @@ public class Group {
 
     public void setNoExercise(Integer noExercise) {
         this.noExercise = noExercise;
+    }
+
+    public enum FIELDS {
+        ID {
+            public String toString() {
+                return "id";
+            }
+        },
+
+        NAME {
+            public String toString() {
+                return "name";
+            }
+        },
+        CAPACITY{
+            public String toString(){
+                return "capacity";
+            }
+        },
+        NO_EXERCISE{
+            public String toString(){
+                return "noExercise";
+            }
+        }
     }
 }

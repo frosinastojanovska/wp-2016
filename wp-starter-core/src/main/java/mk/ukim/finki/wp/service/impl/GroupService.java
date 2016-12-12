@@ -1,7 +1,9 @@
 package mk.ukim.finki.wp.service.impl;
 
 import mk.ukim.finki.wp.model.Group;
+import mk.ukim.finki.wp.persistence.IGroupRepository;
 import mk.ukim.finki.wp.service.IGroupService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -11,24 +13,27 @@ import java.util.*;
  */
 @Service
 public class GroupService implements IGroupService{
-    private static Map<Integer,Group> idToGroup = new HashMap<Integer, Group>();
+
+    private IGroupRepository repository;
+
+    @Autowired
+    public GroupService(IGroupRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Group> findAll(){
-        return new ArrayList<Group>(idToGroup.values());
+        return repository.findAll();
     }
     public Group findById(Integer id){
-        return idToGroup.get(id);
+        return repository.findById(id);
     }
     public Group save(Group entity){
-        entity.setId(new Random().nextInt(Integer.MAX_VALUE));
-        idToGroup.put(entity.getId(), entity);
-        return entity;
+        return repository.save(entity);
     }
     public void update(Integer id, Group entity){
-        idToGroup.remove(id);
-        idToGroup.put(id, entity);
+        repository.update(id, entity);
     }
     public void delete(Integer id){
-        idToGroup.remove(id);
+        repository.delete(id);
     }
 }
