@@ -19,14 +19,18 @@ public class Group {
     private Integer capacity;
     @Min(value = 0)
     private Integer noExercise;
+    @NotNull
+    @ManyToOne
+    private Course course;
 
     public Group(){}
 
-    public Group(Integer id, String name, Integer capacity, Integer noExercise) {
+    public Group(Integer id, String name, Integer capacity, Integer noExercise, Course course) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;
         this.noExercise = noExercise;
+        this.course = course;
     }
 
     public Integer getId() {
@@ -59,6 +63,14 @@ public class Group {
 
     public void setNoExercise(Integer noExercise) {
         this.noExercise = noExercise;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public enum FIELDS {

@@ -18,9 +18,6 @@ var fs = require("fs");
 
 var JS_APP = [
   'app/app.js',
-  'app/c1/c1.state.js',
-  'app/c1/first.controller.js',
-  'app/c1/second.controller.js',
   'app/group/group.state.js',
   'app/group/group.controller.js',
   'app/group/group.remote.service.js',
