@@ -8,9 +8,9 @@
       .module('wp-angular-starter')
       .controller('StudentController', StudentController);
 
-    StudentController.$inject = ['$log', '$filter', 'StudentService', 'GroupService'];
+    StudentController.$inject = ['$log', '$filter', 'StudentService'];
 
-    function StudentController($log, $filter, StudentService, GroupService){
+    function StudentController($log, $filter, StudentService){
       var vm = this;
       vm.entity = {};
       vm.entities = [];
@@ -23,15 +23,7 @@
       vm.remove = remove;
       vm.itemsByPage=5;
       vm.displayedPages=7;
-      loadGroups();
       loadStudents();
-
-      function loadGroups() {
-        GroupService.getAll().then(function (data) {
-          $log.debug(data);
-          vm.groups = data;
-        });
-      }
 
       function loadStudents(){
         StudentService.getAll().then(function(data){

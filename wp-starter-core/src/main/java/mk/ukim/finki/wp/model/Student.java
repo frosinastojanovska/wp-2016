@@ -20,12 +20,6 @@ public class Student {
 
     public Student(){}
 
-    public Student(String index, String name, String surname) {
-        this.index = index;
-        this.name = name;
-        this.surname = surname;
-    }
-
     public String getIndex() {
         return index;
     }

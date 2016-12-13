@@ -18,11 +18,6 @@ public class StudentCourseAssociation {
 
     public StudentCourseAssociation(){}
 
-    public StudentCourseAssociation(Course course, Student student) {
-        this.course = course;
-        this.student = student;
-    }
-
     public Integer getId() {
         return id;
     }

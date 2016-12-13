@@ -1,6 +1,5 @@
 package mk.ukim.finki.wp.web;
 
-import mk.ukim.finki.wp.model.Course;
 import mk.ukim.finki.wp.model.Student;
 import mk.ukim.finki.wp.model.StudentCourseAssociation;
 import mk.ukim.finki.wp.service.IStudentService;

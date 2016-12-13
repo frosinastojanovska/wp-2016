@@ -1,13 +1,11 @@
 package mk.ukim.finki.wp.service.impl;
 
 import mk.ukim.finki.wp.events.StudentEnrolledInCourse;
-import mk.ukim.finki.wp.model.Course;
 import mk.ukim.finki.wp.model.Student;
 import mk.ukim.finki.wp.model.StudentCourseAssociation;
 import mk.ukim.finki.wp.persistence.IStudentRepository;
 import mk.ukim.finki.wp.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
