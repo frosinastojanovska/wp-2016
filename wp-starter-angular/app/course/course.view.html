@@ -8,21 +8,20 @@
       <wp-input wp-label="Name" wp-type="text" wp-model="vm.entity.name" wp-focus="true" wp-required="true" ng-cloak></wp-input>
       <div class="form-group">
         <label>Size</label>
-        <ui-select ng-model="vm.entity.course"
-                   title="Choose group size"
-                   ng-required="true">
+        <ui-select ng-model="vm.entity.courseDependency"
+                   title="Choose dependecy course"
+                   ng-required="false">
           <ui-select-match
-            placeholder="Select group size...">
-            <span>{{$select.selected}}</span>
+            placeholder="Select course...">
+            <span>{{$select.selected.name}}</span>
           </ui-select-match>
           <ui-select-choices
-            repeat="item in (vm.availableSizes | filter:$select.search )"
+            repeat="item in (vm.entities | filter:$select.search )"
             position="auto">
-            {{item}}
+            {{item.name}}
           </ui-select-choices>
         </ui-select>
       </div>
-      <wp-input wp-label="Exercise Number" wp-type="number" wp-model="vm.entity.noExercise" wp-focus="false" wp-required="true" ng-cloak></wp-input>
 
     </div>
     <div class="panel-footer text-right">
@@ -64,18 +63,14 @@
     <table ng-show="vm.entities.length>0" class="table table-bordered table-striped">
       <tr>
         <th>
-          <button ng-click="vm.sortBy('name')" class="btn btn-default">Group Name &nbsp; <i class="fa fa-x fa-sort"></i> </button>
+          <button ng-click="vm.sortBy('name')" class="btn btn-default">Course Name &nbsp; <i class="fa fa-x fa-sort"></i> </button>
         </th>
-        <th>Group Size</th>
-        <th>
-          <button ng-click="vm.sortBy('exerciseNum')" class="btn btn-default">Exercise Number <i class="fa fa-x fa-sort"></i></button>
-        </th>
+        <th>Dependency Course</th>
         <th>Actions</th>
       </tr>
       <tr ng-repeat="e in vm.entities | orderBy:vm.propertyName:vm.reverse | filter:vm.search">
         <td>{{e.name}}</td>
-        <td>{{e.capacity}}</td>
-        <td>{{e.noExercise}}</td>
+        <td>{{e.courseDependency.name}}</td>
         <td>
           <button class="btn btn-xs btn-default"
                   ng-click="vm.edit(e)">
@@ -90,7 +85,7 @@
     </table>
 
     <div class="panel panel-warning text-warning" ng-hide="vm.entities.length>0">
-      There are no groups!
+      There are no courses!
     </div>
   </div>
 </div>

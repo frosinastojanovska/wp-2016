@@ -1,17 +1,17 @@
 /**
- * Created by Frosina on 28.11.2016.
+ * Created by Frosina on 13.12.2016.
  */
 (function (angular) {
   'use strict';
 
   angular
     .module('wp-angular-starter')
-    .factory('GroupService', GroupServiceFn);
+    .factory('CourseService', CourseServiceFn);
 
-  GroupServiceFn.$inject = ['$resource'];
+  CourseServiceFn.$inject = ['$resource'];
 
-  function GroupServiceFn($resource) {
-    var resource = $resource('/api/groups/:id', {},
+  function CourseServiceFn($resource) {
+    var resource = $resource('/api/courses/:id', {},
       {
         update: {method: "PUT"}
       }

@@ -1,16 +1,19 @@
+/**
+ * Created by Frosina on 13.12.2016.
+ */
 (function (angular) {
   'use strict';
 
   angular
     .module('wp-angular-starter')
-    .controller('GroupController', GroupController);
+    .controller('CourseController', CourseController);
 
-  GroupController.$inject = ['$log', 'GroupService', 'CourseService', 'orderByFilter'];
+  CourseController.$inject = ['$log', 'CourseService', 'orderByFilter'];
 
   /* @ngInject */
-  function GroupController($log, GroupService, CourseService, orderBy) {
+  function CourseController($log, CourseService, orderBy) {
     var vm = this;
-    vm.title = 'Group';
+    vm.title = 'Course';
     vm.save = save;
     vm.clear = clear;
     vm.edit = edit;
@@ -20,28 +23,19 @@
     vm.reverse = true;
     vm.entity = {};
     vm.entities = [];
-    vm.courses = [];
     vm.saveOkMsg = null;
     vm.saveErrMsg = null;
-    vm.availableSizes = [20, 40];
-    loadGroups();
     loadCourses();
 
     function loadCourses() {
       CourseService.getAll().then(function (data) {
-        vm.courses = data;
-      });
-    }
-
-    function loadGroups() {
-      GroupService.getAll().then(function (data) {
         vm.entities = data;
       });
     }
 
     function remove(entity) {
-      GroupService.remove(entity).then(function () {
-        loadGroups();
+      CourseService.remove(entity).then(function () {
+        loadCourses();
       });
     }
 
@@ -49,12 +43,12 @@
       vm.saveOkMsg = null;
       vm.saveErrMsg = null;
 
-      var promise = GroupService.save(vm.entity);
+      var promise = CourseService.save(vm.entity);
       promise.then(successCallback, errorCallback);
 
       function successCallback(data) {
-        loadGroups();
-        vm.saveOkMsg = "Group with id " + data.id + " is saved";
+        loadCourses();
+        vm.saveOkMsg = "Course with id " + data.id + " is saved";
         clear();
       }
 

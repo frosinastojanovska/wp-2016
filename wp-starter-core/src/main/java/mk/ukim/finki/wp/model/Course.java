@@ -13,9 +13,9 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotNull
+    @Column(unique=true)
     private String name;
     @ManyToOne(fetch = FetchType.EAGER)
-    // sets the column name to the default value; optional annotation
     @JoinColumn(name = "course_dependency_id")
     public Course courseDependency;
 
@@ -39,5 +39,32 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Course getCourseDependency() {
+        return courseDependency;
+    }
+
+    public void setCourseDependency(Course courseDependency) {
+        this.courseDependency = courseDependency;
+    }
+
+    public enum FIELDS {
+        ID {
+            public String toString() {
+                return "id";
+            }
+        },
+
+        NAME {
+            public String toString() {
+                return "name";
+            }
+        },
+        DEPENDECNY{
+            public String toString(){
+                return "courseDependency";
+            }
+        }
     }
 }

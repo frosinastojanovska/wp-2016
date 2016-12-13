@@ -23,7 +23,22 @@
         </ui-select>
       </div>
       <wp-input wp-label="Exercise Number" wp-type="number" wp-model="vm.entity.noExercise" wp-focus="false" wp-required="true" ng-cloak></wp-input>
-
+      <div class="form-group">
+        <label>Course</label>
+        <ui-select ng-model="vm.entity.course"
+                   title="Choose group size"
+                   ng-required="true">
+          <ui-select-match
+            placeholder="Select course...">
+            <span>{{$select.selected.name}}</span>
+          </ui-select-match>
+          <ui-select-choices
+            repeat="item in (vm.courses | filter:$select.search )"
+            position="auto">
+            {{item.name}}
+          </ui-select-choices>
+        </ui-select>
+      </div>
     </div>
     <div class="panel-footer text-right">
       <div class="panel panel-danger text-center text-danger" ng-show="vm.saveErrMsg">
@@ -70,12 +85,14 @@
         <th>
           <button ng-click="vm.sortBy('exerciseNum')" class="btn btn-default">Exercise Number <i class="fa fa-x fa-sort"></i></button>
         </th>
+        <th>Course</th>
         <th>Actions</th>
       </tr>
       <tr ng-repeat="e in vm.entities | orderBy:vm.propertyName:vm.reverse | filter:vm.search">
         <td>{{e.name}}</td>
         <td>{{e.capacity}}</td>
         <td>{{e.noExercise}}</td>
+        <td>{{e.course.name}}</td>
         <td>
           <button class="btn btn-xs btn-default"
                   ng-click="vm.edit(e)">
