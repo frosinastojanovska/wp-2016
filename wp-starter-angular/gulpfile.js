@@ -20,6 +20,7 @@ var JS_APP = [
   'app/app.js',
   'app/course/course.state.js',
   'app/course/course.controller.js',
+  'app/course/courses.controller.js',
   'app/course/course.remote.service.js',
   'app/group/group.state.js',
   'app/group/group.controller.js',

@@ -13,8 +13,13 @@
 
   function registerState($stateProvider) {
 
-    $stateProvider.state('course', {
+    $stateProvider.state('courses', {
       url: '/courses',
+      templateUrl: 'app/course/courses.view.html',
+      controller: 'CoursesController',
+      controllerAs: 'vm'
+    }).state('course', {
+      url: '/courses/{id}',
       templateUrl: 'app/course/course.view.html',
       controller: 'CourseController',
       controllerAs: 'vm'

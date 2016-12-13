@@ -1,6 +1,8 @@
 package mk.ukim.finki.wp.persistence;
 
+import mk.ukim.finki.wp.model.Course;
 import mk.ukim.finki.wp.model.Student;
+import mk.ukim.finki.wp.model.StudentCourseAssociation;
 
 import java.util.List;
 
@@ -13,4 +15,5 @@ public interface IStudentRepository {
     Student save(Student entity);
     void update(Integer id, Student entity);
     void delete(Integer id);
+    void addStudentToCourse(StudentCourseAssociation entity);
 }

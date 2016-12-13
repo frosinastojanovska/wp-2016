@@ -35,7 +35,6 @@ public class CourseRepository implements ICourseRepository {
         query.select(from);
         query.select(from).where(cb.equal(from.get(Course.FIELDS.ID.toString()), id));
         TypedQuery<Course> q = entityManager.createQuery(query);
-        q.setParameter(id, id);
         return q.getSingleResult();
     }
     @Transactional

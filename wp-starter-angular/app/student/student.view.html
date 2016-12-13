@@ -16,7 +16,6 @@
         <label>Index</label>
         <input class="form-control" type="number" ng-model="vm.entity.index" ng-required="true">
       </div>
-      <group-select wp-model="vm.entity.group" ng-cloak></group-select>
     </div>
     <div class="panel-footer text-right">
       <div class="panel panel-danger text-center text-danger" ng-show="vm.saveErrMsg">
@@ -46,9 +45,6 @@
         <th st-sort="index">
           <button class="btn btn-default">Index &nbsp; <i class="fa fa-x fa-sort"></i></button>
         </th>
-        <th st-sort="group.name">
-          <button class="btn btn-default">Group Name &nbsp; <i class="fa fa-x fa-sort"></i></button>
-        </th>
         <th>Actions</th>
       </tr>
       <tr>
@@ -65,7 +61,6 @@
         <td>{{e.name}}</td>
         <td>{{e.surname}}</td>
         <td>{{e.index}}</td>
-        <td>{{e.group.name}}</td>
         <td>
           <button class="btn btn-xs btn-default"
                   ng-click="vm.edit(e)">

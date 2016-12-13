@@ -8,57 +8,51 @@
     .module('wp-angular-starter')
     .controller('CourseController', CourseController);
 
-  CourseController.$inject = ['$log', 'CourseService', 'orderByFilter'];
+  CourseController.$inject = ['$log', '$window', '$stateParams', 'CourseService', 'StudentService', 'orderByFilter'];
 
   /* @ngInject */
-  function CourseController($log, CourseService, orderBy) {
+  function CourseController($log, $window, $stateParams, CourseService, StudentService, orderBy) {
     var vm = this;
     vm.title = 'Course';
-    vm.save = save;
-    vm.clear = clear;
     vm.edit = edit;
     vm.remove = remove;
-    vm.sortBy = sortBy;
+    vm.assignStudent = assignStudent;
     vm.propertyName = 'name';
     vm.reverse = true;
     vm.entity = {};
-    vm.entities = [];
+    vm.students = [];
+    vm.courses = [];
+    vm.selectedStudent = null;
     vm.saveOkMsg = null;
     vm.saveErrMsg = null;
+    loadCourse();
     loadCourses();
+    loadStudents();
 
-    function loadCourses() {
-      CourseService.getAll().then(function (data) {
-        vm.entities = data;
+    function loadCourse() {
+      var currentId = $stateParams.id;
+      CourseService.getById(currentId).then(function (data) {
+        vm.entity = data;
       });
     }
 
-    function remove(entity) {
-      CourseService.remove(entity).then(function () {
-        loadCourses();
+    function loadCourses(){
+      CourseService.getAll().then(function(data){
+        vm.courses = data;
       });
     }
 
-    function save() {
-      vm.saveOkMsg = null;
-      vm.saveErrMsg = null;
-
-      var promise = CourseService.save(vm.entity);
-      promise.then(successCallback, errorCallback);
-
-      function successCallback(data) {
-        loadCourses();
-        vm.saveOkMsg = "Course with id " + data.id + " is saved";
-        clear();
-      }
-
-      function errorCallback(data) {
-        vm.saveErrMsg = "Saving error occurred: " + data.message;
-      }
+    function loadStudents(){
+      var students;
+      StudentService.getAll().then(function (data) {
+        vm.students = data;
+      });
     }
 
-    function clear() {
-      vm.entity = {};
+    function remove() {
+      CourseService.remove(vm.entity).then(function () {
+        $window.location.href = '/#/courses';
+      });
     }
 
     function edit(entity) {
@@ -66,12 +60,18 @@
       angular.extend(vm.entity, entity);
     }
 
-    function sortBy(propertyName) {
-      vm.reverse = (vm.propertyName === propertyName) ? !vm.reverse : false;
-      vm.propertyName = propertyName;
-      vm.entities = orderBy(vm.entities, vm.propertyName, vm.reverse);
-      $log.debug(vm.propertyName);
-    };
+    function assignStudent(){
+      if(vm.selectedStudent == null) return;
+
+      var studentCourseAssotiation = {
+        course: vm.entity,
+        student: vm.selectedStudent
+      };
+      StudentService.addCourse(studentCourseAssotiation).then(function (){
+        console.log("Adding course");
+        loadStudents();
+      });
+    }
   }
 
 })(angular);

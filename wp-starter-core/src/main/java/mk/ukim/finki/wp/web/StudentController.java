@@ -1,6 +1,8 @@
 package mk.ukim.finki.wp.web;
 
+import mk.ukim.finki.wp.model.Course;
 import mk.ukim.finki.wp.model.Student;
+import mk.ukim.finki.wp.model.StudentCourseAssociation;
 import mk.ukim.finki.wp.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,11 @@ public class StudentController {
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public Student findByIndex(@PathVariable Integer id){
         return studentService.findByIndex(id);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/addCourse")
+    public void addStudentToCourse(@RequestBody StudentCourseAssociation entity){
+        studentService.addCourse(entity);
     }
 
     @RequestMapping(method = RequestMethod.POST)

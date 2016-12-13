@@ -44,7 +44,7 @@
     }
 
     function getByIdFn(id){
-      return resource.get(id).$promise;
+      return resource.get({id: id}).$promise;
     }
 
     function updateFn(entity) {

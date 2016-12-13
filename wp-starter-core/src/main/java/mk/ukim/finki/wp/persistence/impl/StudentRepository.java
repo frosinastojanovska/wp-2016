@@ -1,6 +1,8 @@
 package mk.ukim.finki.wp.persistence.impl;
 
+import mk.ukim.finki.wp.model.Course;
 import mk.ukim.finki.wp.model.Student;
+import mk.ukim.finki.wp.model.StudentCourseAssociation;
 import mk.ukim.finki.wp.persistence.IStudentRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,5 +66,10 @@ public class StudentRepository implements IStudentRepository {
         delete.where(cb.equal(from.get(Student.FIELDS.INDEX.toString()), index));
 
         entityManager.createQuery(delete).executeUpdate();
+    }
+    @Transactional
+    public void addStudentToCourse(StudentCourseAssociation entity){
+        entityManager.persist(entity);
+        entityManager.flush();
     }
 }

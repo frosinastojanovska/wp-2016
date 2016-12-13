@@ -1,22 +1,24 @@
+<div class="row">
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h4>Add or update {{vm.title}}</h4>
+    <h4>Update {{vm.title}}</h4>
   </div>
-  <form ng-submit="vm.save()" name="form">
+  <form ng-submit="vm.edit()" name="form">
     <div class="panel-body">
 
-      <wp-input wp-label="Name" wp-type="text" wp-model="vm.entity.name" wp-focus="true" wp-required="true" ng-cloak></wp-input>
+      <wp-input wp-label="Name" wp-type="text" wp-model="vm.entity.name" wp-focus="true" wp-required="true" ng-cloak>{{vm.entity.name}}</wp-input>
+      <div><b>Course dependency: {{vm.entity.courseDependency.name}}</b></div>
       <div class="form-group">
         <label>Course dependency</label>
         <ui-select ng-model="vm.entity.courseDependency"
-                   title="Choose dependecy course"
+                   title="Choose another dependecy course"
                    ng-required="false">
           <ui-select-match
             placeholder="Select course...">
             <span>{{$select.selected.name}}</span>
           </ui-select-match>
           <ui-select-choices
-            repeat="item in (vm.entities | filter:$select.search )"
+            repeat="item in (vm.courses | filter:$select.search )"
             position="auto">
             {{item.name}}
           </ui-select-choices>
@@ -31,61 +33,43 @@
       <div class="panel panel-success text-center text-success" ng-show="vm.saveOkMsg">
         {{vm.saveOkMsg}}
       </div>
-      <button class="btn btn-default" type="reset"
-              ng-click="vm.clear()">
-        <i class="fa fa-fw fa-refresh"></i>
-        Clear
+      <button class="btn btn-danger" type="reset"
+              ng-click="vm.remove()">
+        <i class="fa fa-fw fa-remove"></i>
+        Remove
       </button>
       <button class="btn btn-primary"
-              type="submit"
-              ng-disabled="form.$invalid">
+              type="update"
+              ng-click="vm.update()">
         <i class="fa fa-fw fa-save"></i>
-        Save
+        Update
       </button>
     </div>
 
   </form>
 </div>
-<div class="row">
-  <div class="col-md-4">
-    <div class="input-group" ng-show="vm.entities.length>0">
-      <input type="text" class="form-control" placeholder="Search for group" ng-model="vm.search.name">
-      <span class="input-group-addon">
-        <i class="fa fa-x fa-search"></i>
-      </span>
-    </div>
-  </div>
-  <div class="col-md-8"></div>
 </div>
-<br/>
-<div class="row">
-  <div class="col-md-12">
-    <table ng-show="vm.entities.length>0" class="table table-bordered table-striped">
-      <tr>
-        <th>
-          <button ng-click="vm.sortBy('name')" class="btn btn-default">Course Name &nbsp; <i class="fa fa-x fa-sort"></i> </button>
-        </th>
-        <th>Dependency Course</th>
-        <th>Actions</th>
-      </tr>
-      <tr ng-repeat="e in vm.entities | orderBy:vm.propertyName:vm.reverse | filter:vm.search">
-        <td>{{e.name}}</td>
-        <td>{{e.courseDependency.name}}</td>
-        <td>
-          <button class="btn btn-xs btn-default"
-                  ng-click="vm.edit(e)">
-            <i class="fa fa-x fa-pencil"></i>&nbsp;Edit
-          </button>
-          <button class="btn btn-xs btn-danger"
-                  ng-click="vm.remove(e)">
-            <i class="fa fa-x fa-trash"></i>&nbsp;Remove
-          </button>
-        </td>
-      </tr>
-    </table>
 
-    <div class="panel panel-warning text-warning" ng-hide="vm.entities.length>0">
-      There are no courses!
-    </div>
+
+<div class="row">
+  <div class="form-group">
+    <ui-select ng-model="vm.selectedStudent"
+               title="Assign student to this course"
+               ng-required="false">
+      <ui-select-match
+        placeholder="Select student...">
+        <span>{{$select.selected.index}} - {{$select.selected.name}} {{$select.selected.surname}}</span>
+      </ui-select-match>
+      <ui-select-choices
+        repeat="item in (vm.students | filter:$select.search )"
+        position="auto">
+        {{item.index}} - {{item.name}} {{item.surname}}
+      </ui-select-choices>
+    </ui-select>
+    <button class="btn btn-default" type="reset"
+            ng-click="vm.assignStudent()">
+      <i class="fa fa-fw fa-plus-circle"></i>
+      Assign
+    </button>
   </div>
 </div>
