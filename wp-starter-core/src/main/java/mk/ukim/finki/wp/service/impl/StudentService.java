@@ -24,8 +24,8 @@ public class StudentService implements IStudentService{
     public List<Student> findAll(){
         return repository.findAll();
     }
-    public Student findById(Integer id){
-        return repository.findById(id);
+    public Student findByIndex(Integer index){
+        return repository.findByIndex(index);
     }
     public Student save(Student entity){
         return repository.save(entity);

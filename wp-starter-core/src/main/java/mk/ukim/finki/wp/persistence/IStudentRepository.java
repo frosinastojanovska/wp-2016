@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface IStudentRepository {
     List<Student> findAll();
-    Student findById(Integer id);
+    Student findByIndex(Integer id);
     Student save(Student entity);
     void update(Integer id, Student entity);
     void delete(Integer id);

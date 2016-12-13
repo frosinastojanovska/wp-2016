@@ -49,4 +49,23 @@ public class Student {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
+    public enum FIELDS {
+        INDEX {
+            public String toString() {
+                return "index";
+            }
+        },
+
+        NAME {
+            public String toString() {
+                return "name";
+            }
+        },
+        SURNAME{
+            public String toString(){
+                return "surname";
+            }
+        }
+    }
 }
