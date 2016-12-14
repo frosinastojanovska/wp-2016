@@ -1,13 +1,20 @@
 <div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-danger text-center text-danger" ng-show="vm.ErrMsg">
+      {{vm.ErrMsg}}
+    </div>
+    <div class="panel panel-success text-center text-success" ng-show="vm.OkMsg">
+      {{vm.OkMsg}}
+    </div>
+  </div>
+  <div class="col-md-12">
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h4>Update {{vm.title}}</h4>
   </div>
   <form ng-submit="vm.edit()" name="form">
     <div class="panel-body">
-
       <wp-input wp-label="Name" wp-type="text" wp-model="vm.entity.name" wp-focus="true" wp-required="true" ng-cloak>{{vm.entity.name}}</wp-input>
-      <div><b>Course dependency: {{vm.entity.courseDependency.name}}</b></div>
       <div class="form-group">
         <label>Course dependency</label>
         <ui-select ng-model="vm.entity.courseDependency"
@@ -27,12 +34,6 @@
 
     </div>
     <div class="panel-footer text-right">
-      <div class="panel panel-danger text-center text-danger" ng-show="vm.saveErrMsg">
-        {{vm.saveErrMsg}}
-      </div>
-      <div class="panel panel-success text-center text-success" ng-show="vm.saveOkMsg">
-        {{vm.saveOkMsg}}
-      </div>
       <button class="btn btn-danger" type="reset"
               ng-click="vm.remove()">
         <i class="fa fa-fw fa-remove"></i>
@@ -48,6 +49,7 @@
 
   </form>
 </div>
+  </div>
 </div>
 
 
@@ -62,7 +64,7 @@
         <span>{{$select.selected.index}} - {{$select.selected.name}} {{$select.selected.surname}}</span>
       </ui-select-match>
       <ui-select-choices
-        repeat="item in (vm.students | filter:$select.search )"
+        repeat="item in (vm.unassignedStudents | filter:$select.search )"
         position="auto">
         {{item.index}} - {{item.name}} {{item.surname}}
       </ui-select-choices>

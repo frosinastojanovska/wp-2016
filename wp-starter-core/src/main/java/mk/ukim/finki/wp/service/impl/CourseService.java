@@ -40,4 +40,11 @@ public class CourseService implements ICourseService {
     public List<Student> getAssignedStudents(Integer id){
         return repository.getAssignedStudents(id);
     }
+    public List<Student> getUnassignedStudents(Integer id){
+        return repository.getUnassignedStudents(id);
+    }
+    public void incrementNumOfStudents(Course entity){
+        entity.setNumOfStudents(entity.getNumOfStudents() + 1);
+        repository.update(entity.getId(), entity);
+    }
 }

@@ -23,37 +23,41 @@
     vm.reverse = true;
     vm.entity = {};
     vm.entities = [];
-    vm.saveOkMsg = null;
-    vm.saveErrMsg = null;
+    vm.OkMsg = null;
+    vm.ErrMsg = null;
     loadCourses();
 
     function loadCourses() {
       CourseService.getAll().then(function (data) {
         vm.entities = data;
+      }, function (response) {
+        vm.ErrMsg = "Error occurred: " + response.data.ex;
       });
     }
 
     function remove(entity) {
       CourseService.remove(entity).then(function () {
         loadCourses();
+      }, function (response) {
+        vm.ErrMsg = "Error occurred: " + response.data.ex;
       });
     }
 
     function save() {
-      vm.saveOkMsg = null;
-      vm.saveErrMsg = null;
+      vm.OkMsg = null;
+      vm.ErrMsg = null;
 
       var promise = CourseService.save(vm.entity);
       promise.then(successCallback, errorCallback);
 
       function successCallback(data) {
         loadCourses();
-        vm.saveOkMsg = "Course with id " + data.id + " is saved";
+        vm.OkMsg = "Course with id " + data.id + " is saved";
         clear();
       }
 
-      function errorCallback(data) {
-        vm.saveErrMsg = "Saving error occurred: " + data.message;
+      function errorCallback(response) {
+        vm.ErrMsg = "Saving error occurred: " + response.data.ex;
       }
     }
 

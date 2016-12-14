@@ -4,8 +4,10 @@ import mk.ukim.finki.wp.model.Course;
 import mk.ukim.finki.wp.model.Student;
 import mk.ukim.finki.wp.service.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -47,5 +49,16 @@ public class CourseController {
     @RequestMapping(method = RequestMethod.GET, value = "/{id}/assignedStudents")
     public List<Student> getAssignedStudents(@PathVariable Integer id){
         return courseService.getAssignedStudents(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}/unassignedStudents")
+    public List<Student> getUnassignedStudents(@PathVariable Integer id){
+        return courseService.getUnassignedStudents(id);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(Exception.class)
+    @ResponseBody ErrorInfo handleBadRequest(HttpServletRequest req, Exception ex) {
+        return new ErrorInfo(req.getRequestURL().toString(), ex);
     }
 }

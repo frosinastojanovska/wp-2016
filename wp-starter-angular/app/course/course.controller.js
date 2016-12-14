@@ -24,17 +24,19 @@
     vm.assignedStudents = [];
     vm.courses = [];
     vm.selectedStudent = null;
-    vm.saveOkMsg = null;
-    vm.saveErrMsg = null;
+    vm.OkMsg = null;
+    vm.ErrMsg = null;
     loadCourse();
     loadAssignedStudents();
     loadCourses();
-    loadStudents();
+    loadUnAssignedStudents();
 
     function loadCourse() {
       var currentId = $stateParams.id;
       CourseService.getById(currentId).then(function (data) {
         vm.entity = data;
+      }, function (response) {
+        vm.ErrMsg = "Error occurred: " + response.data.ex;
       });
     }
 
@@ -43,33 +45,42 @@
       console.log("Uspesno vleze");
       CourseService.getAssignedStudents(currentId).then(function (data) {
         vm.assignedStudents = data;
+      }, function (response) {
+        vm.ErrMsg = "Error occurred: " + response.data.ex;
       });
     }
 
     function loadCourses(){
       CourseService.getAll().then(function(data){
         vm.courses = data;
+      }, function (response) {
+        vm.ErrMsg = "Error occurred: " + response.data.ex;
       });
-      vm.courses.splice(vm.entity, 1);
     }
 
-    function loadStudents(){
-      StudentService.getAll().then(function (data) {
-        vm.students = data;
+    function loadUnAssignedStudents(){
+      var currentId = $stateParams.id;
+      console.log("Uspesno vleze");
+      CourseService.getUnassignedStudents(currentId).then(function (data) {
+        vm.unassignedStudents = data;
+      }, function (response) {
+        vm.ErrMsg = "Error occurred: " + response.data.ex;
       });
-      for (var i = vm.assignedStudents.length -1; i >= 0; i--)
-        vm.students.splice(assignedStudents[i],1);
     }
 
     function remove() {
       CourseService.remove(vm.entity).then(function () {
         $window.location.href = '/#/courses';
+      }, function (response) {
+        vm.ErrMsg = "Error occurred: " + response.data.ex;
       });
     }
 
     function edit() {
       CourseService.update(vm.entity).then(function () {
-
+        vm.OkMsg = "Course updated.";
+      }, function (response) {
+        vm.ErrMsg = "Error occurred: " + response.data.ex;
       });
     }
 
@@ -81,7 +92,11 @@
         student: vm.selectedStudent
       };
       StudentService.addCourse(studentCourseAssotiation).then(function (){
+        vm.OkMsg = "Student assigned to course";
         loadAssignedStudents();
+        loadUnAssignedStudents();
+      }, function (response) {
+        vm.ErrMsg = "Error occurred: " + response.data.ex;
       });
     }
   }

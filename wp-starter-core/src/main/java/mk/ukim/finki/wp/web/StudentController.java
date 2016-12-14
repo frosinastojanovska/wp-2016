@@ -4,8 +4,10 @@ import mk.ukim.finki.wp.model.Student;
 import mk.ukim.finki.wp.model.StudentCourseAssociation;
 import mk.ukim.finki.wp.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -48,5 +50,11 @@ public class StudentController {
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable Integer id){
         studentService.delete(id);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(Exception.class)
+    @ResponseBody ErrorInfo handleBadRequest(HttpServletRequest req, Exception ex) {
+        return new ErrorInfo(req.getRequestURL().toString(), ex);
     }
 }

@@ -50,6 +50,10 @@ public class StudentService implements IStudentService {
     public void addCourse(StudentCourseAssociation entity){
         repository.addStudentToCourse(entity);
         publisher.publishEvent(new StudentEnrolledInCourse(entity.getStudent(), entity.getCourse()));
+
+
+        System.out.println();
+        System.out.println("=====Frlen event=====");
     }
 
 

@@ -1,3 +1,13 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-danger text-center text-danger" ng-show="vm.ErrMsg">
+      {{vm.ErrMsg}}
+    </div>
+    <div class="panel panel-success text-center text-success" ng-show="vm.OkMsg">
+      {{vm.OkMsg}}
+    </div>
+  </div>
+  <div class="col-md-12">
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h4>Add new student</h4>
@@ -18,12 +28,6 @@
       </div>
     </div>
     <div class="panel-footer text-right">
-      <div class="panel panel-danger text-center text-danger" ng-show="vm.saveErrMsg">
-        {{vm.saveErrMsg}}
-      </div>
-      <div class="panel panel-success text-center text-success" ng-show="vm.saveOkMsg">
-        {{vm.saveOkMsg}}
-      </div>
       <button class="btn btn-default" type="button"><i class="fa fa-x fa-refresh"></i>&nbsp;Clear</button>
       <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid"><i class="fa fa-x fa-save"></i>&nbsp;Save
       </button>
@@ -84,6 +88,8 @@
     <div class="panel panel-warning text-warning" ng-hide="vm.entities.length>0">
       There are no students!
     </div>
+  </div>
+</div>
   </div>
 </div>
 

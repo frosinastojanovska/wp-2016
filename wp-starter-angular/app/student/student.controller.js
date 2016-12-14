@@ -29,6 +29,8 @@
         StudentService.getAll().then(function(data){
           vm.rowCollection = data;
           vm.entities = data;
+        }, function (response) {
+          vm.ErrMsg = "Error occurred: " + response.data.ex;
         });
       }
 
@@ -46,8 +48,8 @@
           clear();
         }
 
-        function errorCallback(data) {
-          vm.saveErrMsg = "Saving error occurred: " + data.message;
+        function errorCallback(response) {
+          vm.saveErrMsg = "Saving error occurred: " + response.data.ex;
         }
       }
 
@@ -65,6 +67,8 @@
           .remove(entity)
           .then(function () {
             loadStudents();
+          }, function (response) {
+            vm.ErrMsg = "Error occurred: " + response.data.ex;
           });
       }
 

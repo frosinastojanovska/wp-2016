@@ -6,7 +6,8 @@ import javax.persistence.*;
  * Created by Frosina on 12.12.2016.
  */
 @Entity
-@Table(name = "lab_student_course_association")
+@Table(name = "lab_student_course_association", uniqueConstraints = { @UniqueConstraint(columnNames =
+        { "course_id", "student_index" }) })
 public class StudentCourseAssociation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

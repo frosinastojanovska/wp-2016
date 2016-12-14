@@ -14,7 +14,8 @@
     var resource = $resource('/api/courses/:id', {},
       {
         update: {method: "PUT"},
-        getAssignedStudents: {method: "GET", url:'/api/courses/:id/assignedStudents', isArray: true}
+        getAssignedStudents: {method: "GET", url:'/api/courses/:id/assignedStudents', isArray: true},
+        getUnassignedStudents: {method: "GET", url:'/api/courses/:id/unassignedStudents', isArray: true}
       }
     );
     var service = {
@@ -23,7 +24,8 @@
       getById: getByIdFn,
       getAll: getAllFn,
       remove: removeFn,
-      getAssignedStudents: getAssignedStudentsFn
+      getAssignedStudents: getAssignedStudentsFn,
+      getUnassignedStudents: getUnassignedStudentsFn
     };
 
     return service;
@@ -59,6 +61,10 @@
 
     function getAssignedStudentsFn(id) {
       return resource.getAssignedStudents({id: id}).$promise;
+    }
+
+    function getUnassignedStudentsFn(id) {
+      return resource.getUnassignedStudents({id: id}).$promise;
     }
 
   }

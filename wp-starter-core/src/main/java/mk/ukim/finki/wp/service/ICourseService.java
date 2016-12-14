@@ -15,4 +15,6 @@ public interface ICourseService {
     void update(Integer id, Course entity);
     void delete(Integer id);
     List<Student> getAssignedStudents(Integer id);
+    List<Student> getUnassignedStudents(Integer id);
+    void incrementNumOfStudents(Course entity);
 }

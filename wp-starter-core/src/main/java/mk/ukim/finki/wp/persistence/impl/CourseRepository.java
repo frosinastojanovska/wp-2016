@@ -44,6 +44,7 @@ public class CourseRepository implements ICourseRepository {
         entityManager.flush();
         return entity;
     }
+    @Transactional
     public void update(Integer id, Course entity){
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaUpdate<Course> update = cb.createCriteriaUpdate(Course.class);
@@ -67,6 +68,11 @@ public class CourseRepository implements ICourseRepository {
 
     public List<Student> getAssignedStudents(Integer id){
         TypedQuery<Student> q = entityManager.createQuery("SELECT s.student FROM StudentCourseAssociation s WHERE s.course.id = :id", Student.class);
+        return q.setParameter("id", id).getResultList();
+    }
+
+    public  List<Student> getUnassignedStudents(Integer id){
+        TypedQuery<Student> q = entityManager.createQuery("SELECT s FROM Student s WHERE s NOT IN (SELECT sc.student FROM StudentCourseAssociation sc WHERE sc.course.id = :id)", Student.class);
         return q.setParameter("id", id).getResultList();
     }
 }

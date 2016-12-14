@@ -15,4 +15,5 @@ public interface ICourseRepository {
     void update(Integer id, Course entity);
     void delete(Integer id);
     List<Student> getAssignedStudents(Integer id);
+    List<Student> getUnassignedStudents(Integer id);
 }
