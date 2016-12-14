@@ -1,6 +1,7 @@
 package mk.ukim.finki.wp.web;
 
 import mk.ukim.finki.wp.model.Course;
+import mk.ukim.finki.wp.model.Student;
 import mk.ukim.finki.wp.service.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,5 +42,10 @@ public class CourseController {
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable Integer id){
         courseService.delete(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}/assignedStudents")
+    public List<Student> getAssignedStudents(@PathVariable Integer id){
+        return courseService.getAssignedStudents(id);
     }
 }

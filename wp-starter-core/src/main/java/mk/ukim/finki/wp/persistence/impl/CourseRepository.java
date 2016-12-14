@@ -1,6 +1,7 @@
 package mk.ukim.finki.wp.persistence.impl;
 
 import mk.ukim.finki.wp.model.Course;
+import mk.ukim.finki.wp.model.Student;
 import mk.ukim.finki.wp.persistence.ICourseRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,5 +63,10 @@ public class CourseRepository implements ICourseRepository {
         delete.where(cb.equal(from.get(Course.FIELDS.ID.toString()), id));
 
         entityManager.createQuery(delete).executeUpdate();
+    }
+
+    public List<Student> getAssignedStudents(Integer id){
+        TypedQuery<Student> q = entityManager.createQuery("SELECT s.student FROM StudentCourseAssociation s WHERE s.course.id = :id", Student.class);
+        return q.setParameter("id", id).getResultList();
     }
 }

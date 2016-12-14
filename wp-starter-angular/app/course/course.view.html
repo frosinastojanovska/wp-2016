@@ -40,7 +40,7 @@
       </button>
       <button class="btn btn-primary"
               type="update"
-              ng-click="vm.update()">
+              ng-click="vm.edit()">
         <i class="fa fa-fw fa-save"></i>
         Update
       </button>
@@ -52,10 +52,11 @@
 
 
 <div class="row">
+  <div class="col-md-12">
   <div class="form-group">
+    <label>Assign new student</label>
     <ui-select ng-model="vm.selectedStudent"
-               title="Assign student to this course"
-               ng-required="false">
+               title="Assign student to this course">
       <ui-select-match
         placeholder="Select student...">
         <span>{{$select.selected.index}} - {{$select.selected.name}} {{$select.selected.surname}}</span>
@@ -66,10 +67,39 @@
         {{item.index}} - {{item.name}} {{item.surname}}
       </ui-select-choices>
     </ui-select>
-    <button class="btn btn-default" type="reset"
+    <br>
+    <button class="btn btn-default pull-right" type="reset"
             ng-click="vm.assignStudent()">
       <i class="fa fa-fw fa-plus-circle"></i>
       Assign
     </button>
+    <br>
+    <br>
+  </div>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <label ng-show="vm.assignedStudents.length>0">Assigned students: {{vm.assignedStudents.length}}</label>
+    <table ng-show="vm.assignedStudents.length>0" class="table table-bordered table-striped">
+      <tr>
+        <th>
+          <button ng-click="vm.sortBy('index')" class="btn btn-default">Index &nbsp; <i
+            class="fa fa-x fa-sort"></i></button>
+        </th>
+        <th>Name</th>
+        <th>Surname</th>
+      </tr>
+      <tr ng-repeat="e in vm.assignedStudents | orderBy:vm.propertyName:vm.reverse | filter:vm.search">
+        <td>{{e.index}}</td>
+        <td>{{e.name}}</td>
+        <td>{{e.surname}}</td>
+      </tr>
+    </table>
+
+    <div class="panel panel-warning text-warning" ng-hide="vm.assignedStudents.length>0">
+      There are no assigned Students to this course!
+    </div>
   </div>
 </div>

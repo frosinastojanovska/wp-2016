@@ -68,11 +68,13 @@
             class="fa fa-x fa-sort"></i></button>
         </th>
         <th>Dependency Course</th>
+        <th> Number of students </th>
         <th>Actions</th>
       </tr>
       <tr ng-repeat="e in vm.entities | orderBy:vm.propertyName:vm.reverse | filter:vm.search">
         <td><a ui-sref="course({id:e.id})">{{e.name}}</a></td>
-        <td><a ui-sref="/course/{{e.courseDependency.id}}">{{e.courseDependency.name}}</a></td>
+        <td><a ui-sref="course({id:e.courseDependency.id})">{{e.courseDependency.name}}</a></td>
+        <td>{{e.numOfStudents}}</td>
         <td>
           <button class="btn btn-xs btn-default"
                   ng-click="vm.edit(e)">

@@ -18,6 +18,7 @@ public class Course {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_dependency_id")
     public Course courseDependency;
+    private Integer numOfStudents = 0;
 
     public Course(){}
 
@@ -43,6 +44,14 @@ public class Course {
 
     public void setCourseDependency(Course courseDependency) {
         this.courseDependency = courseDependency;
+    }
+
+    public Integer getNumOfStudents() {
+        return numOfStudents;
+    }
+
+    public void setNumOfStudents(Integer numOfStudents) {
+        this.numOfStudents = numOfStudents;
     }
 
     public enum FIELDS {

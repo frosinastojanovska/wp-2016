@@ -1,6 +1,7 @@
 package mk.ukim.finki.wp.service.impl;
 
 import mk.ukim.finki.wp.model.Course;
+import mk.ukim.finki.wp.model.Student;
 import mk.ukim.finki.wp.persistence.ICourseRepository;
 import mk.ukim.finki.wp.service.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,8 @@ public class CourseService implements ICourseService {
     }
     public void delete(Integer id){
         repository.delete(id);
+    }
+    public List<Student> getAssignedStudents(Integer id){
+        return repository.getAssignedStudents(id);
     }
 }

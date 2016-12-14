@@ -9,3 +9,7 @@
 .clickable {
   cursor: pointer;
 }
+
+body{
+  background: url(http://old.finki.ukim.mk/style/images/frontEnd/layout/bg-body.jpg) center top repeat-x #fbfbfb;;
+}

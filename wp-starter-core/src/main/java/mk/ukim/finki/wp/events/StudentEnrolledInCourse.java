@@ -9,8 +9,8 @@ import org.springframework.context.ApplicationEvent;
  */
 public class StudentEnrolledInCourse extends ApplicationEvent {
 
-    Student student;
-    Course course;
+    private Student student;
+    private Course course;
 
     public StudentEnrolledInCourse(Student student, Course course) {
         super(student);
@@ -19,5 +19,19 @@ public class StudentEnrolledInCourse extends ApplicationEvent {
         this.course = course;
     }
 
+    public Student getStudent() {
+        return student;
+    }
 
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 }

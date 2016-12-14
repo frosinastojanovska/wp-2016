@@ -13,7 +13,8 @@
   function CourseServiceFn($resource) {
     var resource = $resource('/api/courses/:id', {},
       {
-        update: {method: "PUT"}
+        update: {method: "PUT"},
+        getAssignedStudents: {method: "GET", url:'/api/courses/:id/assignedStudents', isArray: true}
       }
     );
     var service = {
@@ -21,7 +22,8 @@
       update: updateFn,
       getById: getByIdFn,
       getAll: getAllFn,
-      remove: removeFn
+      remove: removeFn,
+      getAssignedStudents: getAssignedStudentsFn
     };
 
     return service;
@@ -53,6 +55,10 @@
       }
       return resource.update({id: entity.id}, entity).$promise;
 
+    }
+
+    function getAssignedStudentsFn(id) {
+      return resource.getAssignedStudents({id: id}).$promise;
     }
 
   }

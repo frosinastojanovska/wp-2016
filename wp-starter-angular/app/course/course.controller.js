@@ -21,11 +21,13 @@
     vm.reverse = true;
     vm.entity = {};
     vm.students = [];
+    vm.assignedStudents = [];
     vm.courses = [];
     vm.selectedStudent = null;
     vm.saveOkMsg = null;
     vm.saveErrMsg = null;
     loadCourse();
+    loadAssignedStudents();
     loadCourses();
     loadStudents();
 
@@ -36,17 +38,27 @@
       });
     }
 
+    function loadAssignedStudents() {
+      var currentId = $stateParams.id;
+      console.log("Uspesno vleze");
+      CourseService.getAssignedStudents(currentId).then(function (data) {
+        vm.assignedStudents = data;
+      });
+    }
+
     function loadCourses(){
       CourseService.getAll().then(function(data){
         vm.courses = data;
       });
+      vm.courses.splice(vm.entity, 1);
     }
 
     function loadStudents(){
-      var students;
       StudentService.getAll().then(function (data) {
         vm.students = data;
       });
+      for (var i = vm.assignedStudents.length -1; i >= 0; i--)
+        vm.students.splice(assignedStudents[i],1);
     }
 
     function remove() {
@@ -55,9 +67,10 @@
       });
     }
 
-    function edit(entity) {
-      vm.entity = {};
-      angular.extend(vm.entity, entity);
+    function edit() {
+      CourseService.update(vm.entity).then(function () {
+
+      });
     }
 
     function assignStudent(){
@@ -68,8 +81,7 @@
         student: vm.selectedStudent
       };
       StudentService.addCourse(studentCourseAssotiation).then(function (){
-        console.log("Adding course");
-        loadStudents();
+        loadAssignedStudents();
       });
     }
   }
